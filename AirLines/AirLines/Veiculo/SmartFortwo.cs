@@ -1,5 +1,4 @@
-﻿using AirLines.Local.Enum;
-using AirLines.Tripulantes;
+﻿using AirLines.Tripulantes;
 using AirLines.Veiculo.Contract;
 using System;
 using System.Collections.Generic;
@@ -9,30 +8,24 @@ namespace AirLines.Veiculo
 {
     public class SmartFortwo : ISmartFortwo
     {
+        //private readonly ILocal local;
+
         public int Limite => 2;
-        public LocalVeiculo LocalVeiculo { get; set; }
-        public Local.Local Local { get; set; }
-        public List<Tripulante> ListaTripulantes { get; set; }
+        //public LocalVeiculo LocalVeiculo { get; set; }
+        public Locals.Local Local { get; set; }
+        public List<Tripulante> ListaTripulantesDoVeiculo { get; set; }
 
-        public SmartFortwo(Local.Local origem)
+        public SmartFortwo()
         {
-            LocalVeiculo = LocalVeiculo.Terminal;
-            Local = origem;
-            ListaTripulantes = new List<Tripulante>();
+            ListaTripulantesDoVeiculo = new List<Tripulante>();
         }
 
-        public void MyMethod(Tripulante tripulante)
+        public void Embarcar(List<Tripulante> tripulantes, Locals.Local rota)
         {
-            ListaTripulantes.Add(tripulante);
-        }
-
-        public void Embarcar(List<Tripulante> tripulantes)
-        {
+            AtribuirLocalVeiculo(rota);
             ValidarTripulantes(tripulantes);
-
-            ListaTripulantes.AddRange(tripulantes);
-
-            Local.RemoverTripulantes(ListaTripulantes);
+            ListaTripulantesDoVeiculo.AddRange(tripulantes);
+            Local.RemoverTripulantes(ListaTripulantesDoVeiculo);
         }
 
         private void ValidarTripulantes(List<Tripulante> tripulantes)
@@ -56,19 +49,24 @@ namespace AirLines.Veiculo
 
         public void Desembarcar()
         {
-            Local.AdicionarTripulantes(ListaTripulantes);
-            ListaTripulantes.Clear();
+            Local.AdicionarTripulantes(ListaTripulantesDoVeiculo);
+            ListaTripulantesDoVeiculo.Clear();
         }
 
-        public void Transportar(Local.Local rota)
+        public void Transportar(Locals.Local rota)
         {
-            Local = rota;
+            AtribuirLocalVeiculo(rota);
             Desembarcar();
         }
 
-        public void DestinoVeiculo()
+        private void AtribuirLocalVeiculo(Locals.Local local)
         {
-            LocalVeiculo = (LocalVeiculo.Equals(LocalVeiculo.Terminal) ? LocalVeiculo.Aviao : LocalVeiculo.Terminal);
+            Local = local;
+        }
+
+        public Locals.Local ObterLocalAtual()
+        {
+            return Local;
         }
 
     }

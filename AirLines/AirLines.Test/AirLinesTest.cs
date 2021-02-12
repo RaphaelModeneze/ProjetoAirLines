@@ -1,5 +1,7 @@
+using AirLines.Test.FactoryTest;
 using AirLines.Tripulantes;
 using AirLines.Tripulantes.Cabine;
+using AirLines.Tripulantes.Contracts;
 using AirLines.Tripulantes.Outros;
 using AirLines.Tripulantes.Tecnico;
 using NUnit.Framework;
@@ -28,9 +30,9 @@ namespace AirLines.Test
             ChefeServico = new ChefeServico();
             Comissaria = new Comissaria();
 
-            Aeroporto = new Aeroporto();
+            Aeroporto = new Aeroporto(SmartFortwoFactory.MyMethod());
             Aeroporto.IniciarEmbarque(
-                new List<Tripulante>
+                new List<ITripulante>
                 {
                     Piloto,
                     Oficial,

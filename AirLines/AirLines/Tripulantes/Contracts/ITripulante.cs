@@ -1,9 +1,7 @@
-﻿using System.Collections.Generic;
-
-namespace AirLines.Tripulantes.Contracts
+﻿namespace AirLines.Tripulantes.Contracts
 {
     public interface ITripulante
     {
-        
+        bool PodeFicarAcompanhadoCom(Tripulante tripulante);
     }
 }

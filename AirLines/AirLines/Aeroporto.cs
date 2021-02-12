@@ -1,6 +1,8 @@
-﻿using AirLines.Local;
+﻿using AirLines.Locals;
 using AirLines.Tripulantes;
+using AirLines.Tripulantes.Contracts;
 using AirLines.Veiculo;
+using AirLines.Veiculo.Contract;
 using System;
 using System.Collections.Generic;
 
@@ -8,18 +10,21 @@ namespace AirLines
 {
     public class Aeroporto
     {
-        public Aviao Aviao { get; set; }
-        public Terminal Terminal { get; set; }
+        //private readonly ILocal local;
+        private readonly ISmartFortwo smartFortwo;
+
+        public Local Aviao { get; set; }
+        public Local Terminal { get; set; }
         public SmartFortwo SmartFortwo { get; set; }
 
-        public Aeroporto()
+        public Aeroporto(ISmartFortwo smartFortwo)
         {
             Aviao = new Aviao();
             Terminal = new Terminal();
-            SmartFortwo = new SmartFortwo(Terminal);
+            this.smartFortwo = smartFortwo;
         }
 
-        public void IniciarEmbarque(List<Tripulante> tripulantes)
+        public void IniciarEmbarque(List<ITripulante> tripulantes)
         {
             Terminal.TripulantesNoLocal = tripulantes;
         }
@@ -28,9 +33,8 @@ namespace AirLines
         {
             try
             {
-                SmartFortwo.Embarcar(tripulantes);
-                var rota = DeterminarRotaVeiculo();
-                SmartFortwo.Transportar(rota);
+                smartFortwo.Embarcar(tripulantes, DeterminarRotaVeiculo());
+                smartFortwo.Transportar(DeterminarRotaVeiculo());
             }
             catch (Exception ex)
             {
@@ -38,9 +42,9 @@ namespace AirLines
             }
         }
 
-        private Local.Local DeterminarRotaVeiculo()
+        private Local DeterminarRotaVeiculo()
         {
-            return SmartFortwo.Local.Equals(Terminal) ? Aviao : (Local.Local)Terminal;
+            return (smartFortwo.ObterLocalAtual() == Terminal) ? Aviao : Terminal;
         }
     }
 }
