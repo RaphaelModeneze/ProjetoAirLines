@@ -1,10 +1,13 @@
+using AirLines.Resources;
 using AirLines.Test.FactoryTest;
 using AirLines.Tripulantes;
 using AirLines.Tripulantes.Cabine;
 using AirLines.Tripulantes.Contracts;
 using AirLines.Tripulantes.Outros;
 using AirLines.Tripulantes.Tecnico;
+using FluentAssertions;
 using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 
 namespace AirLines.Test
@@ -31,6 +34,7 @@ namespace AirLines.Test
             Comissaria = new Comissaria();
 
             Aeroporto = new Aeroporto(SmartFortwoFactory.MyMethod());
+
             Aeroporto.IniciarEmbarque(
                 new List<ITripulante>
                 {
@@ -44,14 +48,61 @@ namespace AirLines.Test
         }
 
         [Test]
-        public void Test1()
+        public void Transferir_piloto_oficial_com_sucesso()
         {
             //Arrange
             //Act
-            Aeroporto.Tranferir(new List<Tripulante> { Piloto, Oficial });
+            var result = Aeroporto.Tranferir(new List<Tripulante> { Piloto, Oficial });
 
             //Assert
-            Assert.Pass();
+            result.Should().Be(true);
+            Assert.That(Aeroporto.Terminal.TripulantesNoLocal.Count.Equals(4));
+            Assert.That(Aeroporto.Aviao.TripulantesNoLocal.Count.Equals(2));
+        }
+
+        [Test]
+        public void Transferir_Comissaria_presidiario_com_erro()
+        {
+            //Arrange
+            //Act
+            try
+            {
+                Aeroporto.Tranferir(new List<Tripulante> { Comissaria, Presidiario });
+            }
+            catch (Exception ex)
+            {
+                //Assert
+                StringAssert.Contains(ex.Message, Resource.SemMotorista);
+            }
+        }
+
+        [Test]
+        public void Transferir_chefe_presidiario_com_erro()
+        {
+            //Arrange
+            //Act
+            try
+            {
+                Aeroporto.Tranferir(new List<Tripulante> { ChefeServico, Presidiario });
+            }
+            catch (Exception ex)
+            {
+                //Assert
+                StringAssert.Contains(ex.Message, Resource.NaoAutorizado);
+            }
+        }
+
+        [Test]
+        public void Transferir_policial_presidiario_com_sucesso()
+        {
+            //Arrange
+            //Act
+            var result = Aeroporto.Tranferir(new List<Tripulante> { Policial, Presidiario });
+
+            //Assert
+            result.Should().Be(true);
+            Assert.That(Aeroporto.Terminal.TripulantesNoLocal.Count.Equals(4));
+            Assert.That(Aeroporto.Aviao.TripulantesNoLocal.Count.Equals(2));
         }
     }
 }

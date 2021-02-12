@@ -26,16 +26,17 @@ namespace AirLines
             Terminal.TripulantesNoLocal = tripulantes;
         }
 
-        public void Tranferir(List<Tripulante> tripulantes)
+        public bool Tranferir(List<Tripulante> tripulantes)
         {
             try
             {
                 smartFortwo.Embarcar(tripulantes, DeterminarRotaVeiculo());
                 smartFortwo.Transportar(DeterminarRotaVeiculo());
+                return true;
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex);
+                throw new Exception(ex.Message);
             }
         }
 

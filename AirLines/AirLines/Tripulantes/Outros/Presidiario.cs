@@ -5,7 +5,7 @@
 
         public override bool PodeFicarAcompanhadoCom(Tripulante tripulante)
         {
-            return !tripulante.GetType().Equals(typeof(Policial));
+            return tripulante.GetType().Equals(typeof(Policial));
         }
     }
 }
