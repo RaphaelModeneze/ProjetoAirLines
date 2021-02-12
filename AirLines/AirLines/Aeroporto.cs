@@ -1,7 +1,6 @@
 ﻿using AirLines.Locals;
 using AirLines.Tripulantes;
 using AirLines.Tripulantes.Contracts;
-using AirLines.Veiculo;
 using AirLines.Veiculo.Contract;
 using System;
 using System.Collections.Generic;
@@ -10,12 +9,10 @@ namespace AirLines
 {
     public class Aeroporto
     {
-        //private readonly ILocal local;
         private readonly ISmartFortwo smartFortwo;
 
         public Local Aviao { get; set; }
         public Local Terminal { get; set; }
-        public SmartFortwo SmartFortwo { get; set; }
 
         public Aeroporto(ISmartFortwo smartFortwo)
         {

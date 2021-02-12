@@ -47,8 +47,6 @@ namespace AirLines.Test
         public void Test1()
         {
             //Arrange
-
-
             //Act
             Aeroporto.Tranferir(new List<Tripulante> { Piloto, Oficial });
 
