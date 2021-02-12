@@ -1,4 +1,4 @@
-﻿namespace AirLines.Locals.Enum
+﻿namespace AirLines.Locais.Enum
 {
     public enum EnumLocal
     {

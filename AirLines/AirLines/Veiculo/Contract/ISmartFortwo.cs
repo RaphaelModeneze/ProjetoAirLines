@@ -1,4 +1,4 @@
-﻿using AirLines.Locals;
+﻿using AirLines.Locais;
 using AirLines.Tripulantes;
 using System.Collections.Generic;
 

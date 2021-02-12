@@ -1,11 +1,11 @@
-﻿using AirLines.Locals.Contracts;
-using AirLines.Locals.Enum;
+﻿using AirLines.Locais.Contracts;
+using AirLines.Locais.Enum;
 using AirLines.Tripulantes;
 using AirLines.Tripulantes.Contracts;
 using System;
 using System.Collections.Generic;
 
-namespace AirLines.Locals
+namespace AirLines.Locais
 {
     public class Local : ILocal
     {

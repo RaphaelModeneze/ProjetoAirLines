@@ -1,7 +1,7 @@
 ﻿using AirLines.Tripulantes;
 using System.Collections.Generic;
 
-namespace AirLines.Locals.Contracts
+namespace AirLines.Locais.Contracts
 {
     public interface ILocal
     {

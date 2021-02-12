@@ -1,5 +1,5 @@
-﻿using AirLines.Locals;
-using AirLines.Locals.Contracts;
+﻿using AirLines.Locais;
+using AirLines.Locais.Contracts;
 
 namespace AirLines.Test.FactoryTest
 {

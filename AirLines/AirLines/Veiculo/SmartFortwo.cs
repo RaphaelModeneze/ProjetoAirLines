@@ -1,4 +1,4 @@
-﻿using AirLines.Locals;
+﻿using AirLines.Locais;
 using AirLines.Tripulantes;
 using AirLines.Veiculo.Contract;
 using System;

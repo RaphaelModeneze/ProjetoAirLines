@@ -1,6 +1,6 @@
-﻿using AirLines.Locals.Enum;
+﻿using AirLines.Locais.Enum;
 
-namespace AirLines.Locals
+namespace AirLines.Locais
 {
     public class Aviao : Local
     {
