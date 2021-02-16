@@ -7,7 +7,7 @@ namespace AirLines.Test.FactoryTest
     {
         public static ILocal CriarLocalInicial()
         {
-            return new Terminal();
+            return Terminal.GetTerminal();
         }
     }
 }

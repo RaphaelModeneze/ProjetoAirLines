@@ -2,10 +2,17 @@
 
 namespace AirLines.Locais
 {
-    public class Aviao : Local
+    public sealed class Aviao : Local
     {
-        public Aviao() : base(EnumLocal.Aviao)
+        private static readonly Aviao instance = new Aviao();
+
+        private Aviao() : base(EnumLocal.Aviao)
         {
+        }
+
+        public static Aviao GetAviao()
+        {
+            return instance;
         }
     }
 }

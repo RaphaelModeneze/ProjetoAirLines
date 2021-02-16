@@ -2,10 +2,17 @@
 
 namespace AirLines.Locais
 {
-    public class Terminal : Local
+    public sealed class Terminal : Local
     {
-        public Terminal() : base(EnumLocal.Terminal)
+        private static readonly Terminal instance = new Terminal();
+
+        private Terminal() : base(EnumLocal.Terminal)
         {
+        }
+
+        public static Local GetTerminal()
+        {
+            return instance;
         }
     }
 }

@@ -16,8 +16,8 @@ namespace AirLines
 
         public Aeroporto(ISmartFortwo smartFortwo)
         {
-            Aviao = new Aviao();
-            Terminal = new Terminal();
+            Aviao = Locais.Aviao.GetAviao();
+            Terminal = Locais.Terminal.GetTerminal();
             this.smartFortwo = smartFortwo;
         }
 
