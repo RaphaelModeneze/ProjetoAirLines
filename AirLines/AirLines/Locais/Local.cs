@@ -1,7 +1,5 @@
 ﻿using AirLines.Locais.Contracts;
 using AirLines.Locais.Enum;
-using AirLines.Resources;
-using AirLines.Tripulantes;
 using AirLines.Tripulantes.Contracts;
 using System;
 using System.Collections.Generic;
@@ -19,14 +17,14 @@ namespace AirLines.Locais
             TripulantesNoLocal = new List<ITripulante>();
         }
 
-        public void AdicionarTripulantes(List<Tripulante> tripulantes)
+        public void AdicionarTripulantes(List<ITripulante> tripulantes)
         {
             if (tripulantes is null) throw new Exception(nameof(tripulantes));
 
             TripulantesNoLocal.AddRange(tripulantes);
         }
 
-        public void RemoverTripulantes(List<Tripulante> tripulantes)
+        public void RemoverTripulantes(List<ITripulante> tripulantes)
         {
             if (tripulantes is null) throw new Exception(nameof(tripulantes));
 

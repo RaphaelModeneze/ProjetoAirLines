@@ -1,9 +1,13 @@
-﻿namespace AirLines.Tripulantes.Outros
+﻿using AirLines.Tripulantes.Contracts;
+
+namespace AirLines.Tripulantes.Outros
 {
-    public class Presidiario : Tripulante
+    public class Presidiario : ITripulante
     {
 
-        public override bool PodeFicarAcompanhadoCom(Tripulante tripulante)
+        public bool PodeDirigir(ITripulante tripulante) => false;
+
+        public bool PodeFicarAcompanhadoCom(ITripulante tripulante)
         {
             return tripulante.GetType().Equals(typeof(Policial));
         }

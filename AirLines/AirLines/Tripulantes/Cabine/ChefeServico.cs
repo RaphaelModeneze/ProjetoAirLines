@@ -1,13 +1,12 @@
-﻿namespace AirLines.Tripulantes.Cabine
-{
-    public class ChefeServico : Tripulante
-    {
-        public ChefeServico()
-        {
-            PodeDirigir = true;
-        }
+﻿using AirLines.Tripulantes.Contracts;
 
-        public override bool PodeFicarAcompanhadoCom(Tripulante tripulante)
+namespace AirLines.Tripulantes.Cabine
+{
+    public class ChefeServico : ITripulante
+    {
+        public bool PodeDirigir(ITripulante tripulante) => true;
+
+        public bool PodeFicarAcompanhadoCom(ITripulante tripulante)
         {
             return true;
         }

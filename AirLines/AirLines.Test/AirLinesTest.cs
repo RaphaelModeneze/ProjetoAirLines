@@ -1,6 +1,5 @@
 using AirLines.Resources;
 using AirLines.Test.FactoryTest;
-using AirLines.Tripulantes;
 using AirLines.Tripulantes.Cabine;
 using AirLines.Tripulantes.Contracts;
 using AirLines.Tripulantes.Outros;
@@ -15,7 +14,6 @@ namespace AirLines.Test
     public class Tests
     {
         public Aeroporto Aeroporto { get; set; }
-        public List<Tripulante> ListaDeTripulantes { get; set; }
         public Piloto Piloto { get; set; }
         public Oficial Oficial { get; set; }
         public Policial Policial { get; set; }
@@ -52,7 +50,7 @@ namespace AirLines.Test
         {
             //Arrange
             //Act
-            var result = Aeroporto.Tranferir(new List<Tripulante> { Piloto, Oficial });
+            var result = Aeroporto.Tranferir(new List<ITripulante> { Piloto, Oficial });
 
             //Assert
             result.Should().Be(true);
@@ -65,7 +63,7 @@ namespace AirLines.Test
         {
             //Arrange
             //Act
-            var ex = Assert.Throws<Exception>(() => Aeroporto.Tranferir(new List<Tripulante> { Comissaria, Presidiario }));
+            var ex = Assert.Throws<Exception>(() => Aeroporto.Tranferir(new List<ITripulante> { Comissaria, Presidiario }));
 
             //Assert
             Assert.That(ex.Message, Is.EqualTo(Resource.SemMotorista));
@@ -76,7 +74,7 @@ namespace AirLines.Test
         {
             //Arrange
             //Act
-            var ex = Assert.Throws<Exception>(() => Aeroporto.Tranferir(new List<Tripulante> { ChefeServico, Presidiario }));
+            var ex = Assert.Throws<Exception>(() => Aeroporto.Tranferir(new List<ITripulante> { ChefeServico, Presidiario }));
 
             //Assert
             Assert.That(ex.Message, Is.EqualTo(Resource.NaoAutorizado));
@@ -87,7 +85,7 @@ namespace AirLines.Test
         {
             //Arrange
             //Act
-            var result = Aeroporto.Tranferir(new List<Tripulante> { Policial, Presidiario });
+            var result = Aeroporto.Tranferir(new List<ITripulante> { Policial, Presidiario });
 
             //Assert
             result.Should().Be(true);

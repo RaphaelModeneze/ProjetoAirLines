@@ -2,6 +2,7 @@
 {
     public interface ITripulante
     {
-        bool PodeFicarAcompanhadoCom(Tripulante tripulante);
+        bool PodeDirigir(ITripulante tripulante);
+        bool PodeFicarAcompanhadoCom(ITripulante tripulante);
     }
 }

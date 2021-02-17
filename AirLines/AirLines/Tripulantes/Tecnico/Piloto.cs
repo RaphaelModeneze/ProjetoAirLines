@@ -1,13 +1,12 @@
-﻿namespace AirLines.Tripulantes.Tecnico
-{
-    public class Piloto : Tripulante
-    {
-        public Piloto()
-        {
-            PodeDirigir = true;
-        }
+﻿using AirLines.Tripulantes.Contracts;
 
-        public override bool PodeFicarAcompanhadoCom(Tripulante tripulante)
+namespace AirLines.Tripulantes.Tecnico
+{
+    public class Piloto : ITripulante
+    {
+        public bool PodeDirigir(ITripulante tripulante) => true;
+
+        public bool PodeFicarAcompanhadoCom(ITripulante tripulante)
         {
             return true;
         }

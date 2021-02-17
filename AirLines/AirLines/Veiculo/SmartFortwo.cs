@@ -1,6 +1,6 @@
 ﻿using AirLines.Locais;
 using AirLines.Resources;
-using AirLines.Tripulantes;
+using AirLines.Tripulantes.Contracts;
 using AirLines.Veiculo.Contract;
 using System;
 using System.Collections.Generic;
@@ -13,14 +13,14 @@ namespace AirLines.Veiculo
         private const int LimiteDeTripulantesParaVeiculo = 2;
 
         public Local Local { get; set; }
-        public List<Tripulante> ListaTripulantesDoVeiculo { get; set; }
+        public List<ITripulante> ListaTripulantesDoVeiculo { get; set; }
 
         public SmartFortwo()
         {
-            ListaTripulantesDoVeiculo = new List<Tripulante>();
+            ListaTripulantesDoVeiculo = new List<ITripulante>();
         }
 
-        public void Embarcar(List<Tripulante> tripulantes, Local rota)
+        public void Embarcar(List<ITripulante> tripulantes, Local rota)
         {
             AtualizarLocalVeiculo(rota);
             ValidarTripulantes(tripulantes);
@@ -28,7 +28,7 @@ namespace AirLines.Veiculo
             Local.RemoverTripulantes(ListaTripulantesDoVeiculo);
         }
 
-        private void ValidarTripulantes(List<Tripulante> tripulantes)
+        private void ValidarTripulantes(List<ITripulante> tripulantes)
         {
 
             if (!tripulantes.Any())
@@ -43,14 +43,13 @@ namespace AirLines.Veiculo
                     throw new Exception(Resource.TripulanteNaoEstaLocal);
             }
 
-            var motorista = tripulantes.Find(x => x.PodeDirigir);
-            if (motorista == null)
-                throw new Exception(Resource.SemMotorista);
+            var motorista = tripulantes.Find(x => x.PodeDirigir(x));
+            if (motorista == null) throw new Exception(Resource.SemMotorista);
 
             ValidarPassageiro(tripulantes, motorista);
         }
 
-        private void ValidarPassageiro(List<Tripulante> tripulantes, Tripulante motorista)
+        private void ValidarPassageiro(List<ITripulante> tripulantes, ITripulante motorista)
         {
             foreach (var tripulante in tripulantes.Where(x => !x.Equals(motorista)))
             {

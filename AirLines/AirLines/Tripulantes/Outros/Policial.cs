@@ -1,13 +1,12 @@
-﻿namespace AirLines.Tripulantes.Outros
-{
-    public class Policial : Tripulante
-    {
-        public Policial()
-        {
-            PodeDirigir = true;
-        }
+﻿using AirLines.Tripulantes.Contracts;
 
-        public override bool PodeFicarAcompanhadoCom(Tripulante tripulante)
+namespace AirLines.Tripulantes.Outros
+{
+    public class Policial : ITripulante
+    {
+        public bool PodeDirigir(ITripulante tripulante) => true;
+
+        public bool PodeFicarAcompanhadoCom(ITripulante tripulante)
         {
             return true;
         }

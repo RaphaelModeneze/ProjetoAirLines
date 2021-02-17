@@ -1,5 +1,4 @@
 ﻿using AirLines.Locais;
-using AirLines.Tripulantes;
 using AirLines.Tripulantes.Contracts;
 using AirLines.Veiculo.Contract;
 using System;
@@ -26,7 +25,7 @@ namespace AirLines
             Terminal.TripulantesNoLocal = tripulantes;
         }
 
-        public bool Tranferir(List<Tripulante> tripulantes)
+        public bool Tranferir(List<ITripulante> tripulantes)
         {
             try
             {
