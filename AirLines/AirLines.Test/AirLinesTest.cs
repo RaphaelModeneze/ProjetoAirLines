@@ -65,15 +65,10 @@ namespace AirLines.Test
         {
             //Arrange
             //Act
-            try
-            {
-                Aeroporto.Tranferir(new List<Tripulante> { Comissaria, Presidiario });
-            }
-            catch (Exception ex)
-            {
-                //Assert
-                StringAssert.Contains(ex.Message, Resource.SemMotorista);
-            }
+            var ex = Assert.Throws<Exception>(() => Aeroporto.Tranferir(new List<Tripulante> { Comissaria, Presidiario }));
+
+            //Assert
+            Assert.That(ex.Message, Is.EqualTo(Resource.SemMotorista));
         }
 
         [Test]
@@ -81,15 +76,10 @@ namespace AirLines.Test
         {
             //Arrange
             //Act
-            try
-            {
-                Aeroporto.Tranferir(new List<Tripulante> { ChefeServico, Presidiario });
-            }
-            catch (Exception ex)
-            {
-                //Assert
-                StringAssert.Contains(ex.Message, Resource.NaoAutorizado);
-            }
+            var ex = Assert.Throws<Exception>(() => Aeroporto.Tranferir(new List<Tripulante> { ChefeServico, Presidiario }));
+
+            //Assert
+            Assert.That(ex.Message, Is.EqualTo(Resource.NaoAutorizado));
         }
 
         [Test]
